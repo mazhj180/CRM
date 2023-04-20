@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mazhj.crm.settings.mapper.DicValueMapper">
+  <resultMap id="BaseResultMap" type="com.mazhj.crm.settings.pojo.DicValue">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="value" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="text" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="order_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="type_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, value, text, order_no, type_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dic_value
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_dic_value
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mazhj.crm.settings.pojo.DicValue">
+    insert into tbl_dic_value (id, value, text, 
+      order_no, type_code)
+    values (#{id,jdbcType=CHAR}, #{value,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, 
+      #{orderNo,jdbcType=VARCHAR}, #{typeCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mazhj.crm.settings.pojo.DicValue">
+    insert into tbl_dic_value
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="text != null">
+        text,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="typeCode != null">
+        type_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCode != null">
+        #{typeCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mazhj.crm.settings.pojo.DicValue">
+    update tbl_dic_value
+    <set>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="typeCode != null">
+        type_code = #{typeCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mazhj.crm.settings.pojo.DicValue">
+    update tbl_dic_value
+    set value = #{value,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      type_code = #{typeCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+  <select id="selectDicValueByTypeCode" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from tbl_dic_value
+    where type_code=#{typeCode}
+    order by order_no asc
+  </select>
+</mapper>

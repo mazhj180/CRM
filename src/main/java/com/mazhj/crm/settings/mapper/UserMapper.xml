@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mazhj.crm.settings.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.mazhj.crm.settings.pojo.User">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="login_act" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="login_pwd" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="expire_time" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="lock_state" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="deptno" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="allow_ips" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createTime" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="edit_time" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="edit_by" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, login_act, name, login_pwd, email, expire_time, lock_state, deptno, allow_ips, 
+    createTime, create_by, edit_time, edit_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_user
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mazhj.crm.settings.pojo.User">
+    insert into tbl_user (id, login_act, name, 
+      login_pwd, email, expire_time, 
+      lock_state, deptno, allow_ips, 
+      createTime, create_by, edit_time, 
+      edit_by)
+    values (#{id,jdbcType=CHAR}, #{loginAct,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{loginPwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{expireTime,jdbcType=CHAR}, 
+      #{lockState,jdbcType=CHAR}, #{deptno,jdbcType=CHAR}, #{allowIps,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, #{editTime,jdbcType=CHAR}, 
+      #{editBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mazhj.crm.settings.pojo.User">
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="loginAct != null">
+        login_act,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="loginPwd != null">
+        login_pwd,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="expireTime != null">
+        expire_time,
+      </if>
+      <if test="lockState != null">
+        lock_state,
+      </if>
+      <if test="deptno != null">
+        deptno,
+      </if>
+      <if test="allowIps != null">
+        allow_ips,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="editTime != null">
+        edit_time,
+      </if>
+      <if test="editBy != null">
+        edit_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="loginAct != null">
+        #{loginAct,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null">
+        #{expireTime,jdbcType=CHAR},
+      </if>
+      <if test="lockState != null">
+        #{lockState,jdbcType=CHAR},
+      </if>
+      <if test="deptno != null">
+        #{deptno,jdbcType=CHAR},
+      </if>
+      <if test="allowIps != null">
+        #{allowIps,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mazhj.crm.settings.pojo.User">
+    update tbl_user
+    <set>
+      <if test="loginAct != null">
+        login_act = #{loginAct,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null">
+        expire_time = #{expireTime,jdbcType=CHAR},
+      </if>
+      <if test="lockState != null">
+        lock_state = #{lockState,jdbcType=CHAR},
+      </if>
+      <if test="deptno != null">
+        deptno = #{deptno,jdbcType=CHAR},
+      </if>
+      <if test="allowIps != null">
+        allow_ips = #{allowIps,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        edit_time = #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        edit_by = #{editBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mazhj.crm.settings.pojo.User">
+    update tbl_user
+    set login_act = #{loginAct,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      expire_time = #{expireTime,jdbcType=CHAR},
+      lock_state = #{lockState,jdbcType=CHAR},
+      deptno = #{deptno,jdbcType=CHAR},
+      allow_ips = #{allowIps,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      edit_time = #{editTime,jdbcType=CHAR},
+      edit_by = #{editBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+  <select id="selectUserByNameAndPwd" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from tbl_user
+    where login_act = #{loginAct} and login_pwd = #{loginPwd}
+  </select>
+
+  <select id="selectAllLegalUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from tbl_user
+    where lock_state = '1'
+  </select>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mazhj.crm.workbench.mapper.ClueActivityRelationMapper">
+  <resultMap id="BaseResultMap" type="com.mazhj.crm.workbench.pojo.ClueActivityRelation">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="clue_id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="activity_id" javaType="java.lang.String" jdbcType="CHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, clue_id, activity_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_clue_activity_relation
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_clue_activity_relation
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mazhj.crm.workbench.pojo.ClueActivityRelation">
+    insert into tbl_clue_activity_relation (id, clue_id, activity_id
+      )
+    values (#{id,jdbcType=CHAR}, #{clueId,jdbcType=CHAR}, #{activityId,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mazhj.crm.workbench.pojo.ClueActivityRelation">
+    insert into tbl_clue_activity_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="clueId != null">
+        clue_id,
+      </if>
+      <if test="activityId != null">
+        activity_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="clueId != null">
+        #{clueId,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mazhj.crm.workbench.pojo.ClueActivityRelation">
+    update tbl_clue_activity_relation
+    <set>
+      <if test="clueId != null">
+        clue_id = #{clueId,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        activity_id = #{activityId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mazhj.crm.workbench.pojo.ClueActivityRelation">
+    update tbl_clue_activity_relation
+    set clue_id = #{clueId,jdbcType=CHAR},
+      activity_id = #{activityId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+  <insert id="insertClueActivityRelationByList" parameterType="com.mazhj.crm.workbench.pojo.ClueActivityRelation">
+    insert into tbl_clue_activity_relation(id,clue_id,activity_id)
+    values
+    <foreach collection="list" item="obj" separator=",">
+      (#{obj.id},#{obj.clueId},#{obj.activityId})
+    </foreach>
+  </insert>
+
+  <delete id="deleteClueActivityRelationByClueIdActivityId" parameterType="com.mazhj.crm.workbench.pojo.ClueActivityRelation">
+    delete from tbl_clue_activity_relation where clue_id=#{clueId} and activity_id=#{activityId}
+  </delete>
+
+  <select id="selectClueActivityRelationByClueId" parameterType="string" resultMap="BaseResultMap">
+    select id,clue_id,activity_id
+    from tbl_clue_activity_relation
+    where clue_id=#{clueId}
+  </select>
+
+  <delete id="deleteClueActivityRelationByClueId" parameterType="string">
+    delete from tbl_clue_activity_relation where clue_id=#{clueId}
+  </delete>
+</mapper>
